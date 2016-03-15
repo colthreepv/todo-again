@@ -1,15 +1,15 @@
 {
-  "name": "todomvc-react-only",
+  "name": "todo-again-reactvanilla",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Todo MVC all over again to evaluate possibile frameworks to use",
+  "main": "src/main.js",
   "scripts": {
     "build": "webpack",
     "start": "webpack-dev-server -d --hot --inline --open",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "colthreepv",
+  "license": "MIT",
   "dependencies": {
     "classnames": "^2.2.3",
     "react": "^0.14.7",
