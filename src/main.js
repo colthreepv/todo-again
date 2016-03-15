@@ -1,6 +1,6 @@
 'use strict';
 import React from 'react';
 import { render } from 'react-dom';
-import { TodoContainer } from 'todoapp';
+import { TodoApp } from 'todoapp';
 
-render(<TodoContainer/>, document.getElementById('container'));
+render(<TodoApp/>, document.getElementById('container'));

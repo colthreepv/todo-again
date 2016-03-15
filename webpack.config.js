@@ -22,5 +22,8 @@ module.exports = {
         loaders: ['style-loader', 'css-loader?modules']
       }
     ]
+  },
+  devServer: {
+    devtool: '#cheap-module-eval-source-map'
   }
 };
