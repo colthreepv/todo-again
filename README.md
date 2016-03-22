@@ -3,7 +3,7 @@ Todo again
 
 Just gonna do Todo MVC all over again to evaluate possibile frameworks to use.
 
-This one is: **React.js w/o Flux**
+This one is: **React.js + Redux**
 
 The repository includes a "base":
   * eslint
