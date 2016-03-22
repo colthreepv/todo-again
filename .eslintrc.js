@@ -7,6 +7,7 @@ module.exports = {
     es6: true
   },
   rules: {
+    'arrow-spacing': 2,
     'brace-style': [2, '1tbs'],
     'comma-style': [2, 'last'],
     curly: [2, 'multi-line'],
@@ -24,6 +25,7 @@ module.exports = {
     'no-shadow': 0,
     'no-unused-vars': [1, {vars: 'all', args: 'after-used'}],
     'no-var': 0,
+    'object-curly-spacing': [2, 'always'],
     'prefer-const': 2,
     quotes: [1, 'single'],
     radix: 2,
