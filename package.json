@@ -1,5 +1,5 @@
 {
-  "name": "todo-again-reactvanilla",
+  "name": "todo-again-reactredux",
   "version": "1.0.0",
   "description": "Todo MVC all over again to evaluate possibile frameworks to use",
   "main": "src/main.js",
@@ -13,7 +13,8 @@
   "dependencies": {
     "classnames": "^2.2.3",
     "react": "^0.14.7",
-    "react-dom": "^0.14.7"
+    "react-dom": "^0.14.7",
+    "redux": "^3.3.1"
   },
   "devDependencies": {
     "babel-core": "^6.7.2",

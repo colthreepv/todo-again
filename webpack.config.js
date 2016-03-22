@@ -3,7 +3,7 @@ const path = require('path');
 
 module.exports = {
   entry: [
-    path.join(__dirname, 'src', 'main.js')
+    path.join(__dirname, 'src', 'main2.js')
   ],
   output: {
     path: path.join(__dirname, 'build'),
