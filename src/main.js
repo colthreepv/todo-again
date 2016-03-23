@@ -4,7 +4,7 @@ import { todoApp } from './reducers';
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { TodoApp } from 'todoapp';
+import App from './app';
 
 const store = createStore(
   todoApp,
@@ -20,7 +20,7 @@ const unsubscribe = store.subscribe(() => { console.log(store.getState()); });
 
 render(
   <Provider store={store}>
-    <TodoApp/>
+    <App/>
   </Provider>,
   document.getElementById('container')
 );
