@@ -8,9 +8,9 @@ export class List extends Component {
     return (
       <div className="todoList">
         {list.map(elem => <TodoElem key={elem.text}
-          done={elem.toggle}
+          done={elem.done}
           text={elem.text}
-          toggleElem={toggleElem(elem)}/>)
+          toggleElem={() => toggleElem(elem.id)}/>)
         }
       </div>
     );
@@ -18,7 +18,7 @@ export class List extends Component {
 }
 List.propTypes = {
   list: PropTypes.array,
-  toggleElem: PropTypes.func
+  toggleElem: PropTypes.func.isRequired
 };
 
 export class TodoElem extends Component {

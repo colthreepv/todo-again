@@ -7,7 +7,7 @@ import { combineReducers } from 'redux';
 // first Todo Manually created
 const firstTodo = {
   text: 'Hello World',
-  done: false,
+  done: true,
   id: generator()
 };
 
