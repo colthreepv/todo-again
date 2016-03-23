@@ -46,6 +46,8 @@ function todos (state = initialTodos, action) {
 
 function typing (state = '', action) {
   switch (action.type) {
+  case ADD_TODO:
+    return '';
   case TYPE_TODO:
     return action.text;
   default:
