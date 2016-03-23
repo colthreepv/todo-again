@@ -7,7 +7,7 @@ export class List extends Component {
     const { list, toggleElem } = this.props;
     return (
       <div className="todoList">
-        {list.map(elem => <TodoElem key={elem.text}
+        {list.map(elem => <TodoElem key={elem.id}
           done={elem.done}
           text={elem.text}
           toggleElem={() => toggleElem(elem.id)}/>)

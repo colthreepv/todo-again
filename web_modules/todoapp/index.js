@@ -10,17 +10,16 @@ import * as actions from '../../src/actions';
 class App extends Component {
   render () {
     const { typing, todos } = this.props;
-    const { actAddTodo, actTypeTodo, actCheckTodo } = this.props;
-    // const actCheckTodo = function () {};
+    const { addTodo, typeTodo, checkTodo } = this.props;
     return (
       <section className="todoapp">
         <Logo/>
         <Container
           text={typing}
-          typeHandler={actTypeTodo}
-          submitHandler={(evt) => actAddTodo(evt, typing)}
+          typeHandler={typeTodo}
+          submitHandler={(evt) => addTodo(evt, typing)}
           todoList={todos}
-          toggleElem={actCheckTodo}
+          toggleElem={checkTodo}
         />
         <Status/>
       </section>
@@ -31,20 +30,20 @@ App.propTypes = {
   typing: PropTypes.string.isRequired,
   todos: PropTypes.array.isRequired,
 
-  actAddTodo: PropTypes.func.isRequired,
-  actTypeTodo: PropTypes.func.isRequired,
-  actCheckTodo: PropTypes.func.isRequired
+  addTodo: PropTypes.func.isRequired,
+  typeTodo: PropTypes.func.isRequired,
+  checkTodo: PropTypes.func.isRequired
 };
 
-// Handlers
-function typeHandler (evt) {
-  return actions.typeTodo(evt.target.value);
-}
-function submitHandler (evt, text) {
+// from Handlers to ActionCreators
+function addTodo (evt, text) {
   evt.preventDefault();
   return actions.addTodo(text);
 }
-function toggleElem (id) {
+function typeTodo (evt) {
+  return actions.typeTodo(evt.target.value);
+}
+function checkTodo (id) {
   return actions.checkTodo(id);
 }
 
@@ -53,16 +52,11 @@ function mapStateToProps (state) {
 }
 
 function mapDispatchToProps (dispatch) {
-  // return bindActionCreators({
-  //   actAddTodo: createTodo,
-  //   actTypeTodo: typeTodo,
-  //   actCheckTodo: toggleElem
-  // }, dispatch);
-  return {
-    actAddTodo: bindActionCreators(submitHandler,dispatch),
-    actTypeTodo: bindActionCreators(typeHandler, dispatch),
-    actCheckTodo: bindActionCreators(toggleElem, dispatch)
-  };
+  return bindActionCreators({
+    addTodo,
+    typeTodo,
+    checkTodo
+  }, dispatch);
 }
 
 const TodoApp = connect(mapStateToProps, mapDispatchToProps)(App);
