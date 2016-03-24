@@ -1,10 +1,15 @@
 'use strict';
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
-  entry: [
-    path.join(__dirname, 'src', 'main.js')
-  ],
+  devServer: {
+    devtool: '#cheap-module-eval-source-map'
+  },
+  entry: {
+    js: path.join(__dirname, 'src', 'main.js'),
+    vendor: ['react', 'react-redux', 'redux']
+  },
   output: {
     path: path.join(__dirname, 'build'),
     filename: 'bundle.js',
@@ -14,7 +19,7 @@ module.exports = {
     loaders: [
       {
         test: /.jsx?$/,
-        loaders: ['react-hot', 'babel-loader'],
+        loader: 'babel-loader',
         exclude: /node_modules/
       },
       {
@@ -23,7 +28,17 @@ module.exports = {
       }
     ]
   },
-  devServer: {
-    devtool: '#cheap-module-eval-source-map'
-  }
+  resolve: {
+    modules: [
+      'node_modules',
+      'web_modules'
+    ]
+  },
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: Infinity,
+      filename: 'vendor.bundle.js'
+    })
+  ]
 };
