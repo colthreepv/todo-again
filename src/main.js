@@ -6,15 +6,16 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import App from './app';
 
-let store;
-if (process.env.NODE_ENV === 'production') {
-  store = createStore(
-    todoApp,
-    window.STATE_FROM_SERVER
-    // applyMiddleware(thunk)
-  );
-} else {
-  store = require('./store.dev').default;
+let store, DevTools;
+store = createStore(
+  todoApp,
+  window.STATE_FROM_SERVER
+  // applyMiddleware(thunk)
+);
+
+if (process.env.NODE_ENV === 'development') {
+  store = require('./development').store;
+  DevTools = require('./development').DevTools;
 }
 
 let rootElem;
@@ -25,7 +26,6 @@ if (process.env.NODE_ENV === 'production') {
     </Provider>
   );
 } else {
-  const DevTools = require('./devtools').default;
   rootElem = (
     <Provider store={store}>
       <div>
