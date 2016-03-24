@@ -2,6 +2,37 @@
 const path = require('path');
 const webpack = require('webpack');
 
+const env = process.env.NODE_ENV || 'development';
+const isProd = env === 'production';
+
+const pluginList = [
+  new webpack.optimize.CommonsChunkPlugin({
+    name: 'vendor',
+    minChunks: Infinity,
+    filename: 'vendor.bundle.js'
+  }),
+  new webpack.DefinePlugin({
+    'process.env.NODE_ENV': `"${env}"`
+  })
+];
+
+if (isProd) { // add plugins in case we're in production
+  pluginList.push(new webpack.LoaderOptionsPlugin({
+    minimize: true,
+    debug: false
+  }));
+
+  pluginList.push(new webpack.optimize.UglifyJsPlugin({
+    compress: {
+      warnings: false
+    },
+    output: {
+      comments: false
+    },
+    sourceMap: false
+  }));
+}
+
 module.exports = {
   devServer: {
     devtool: '#cheap-module-eval-source-map'
@@ -34,11 +65,5 @@ module.exports = {
       'web_modules'
     ]
   },
-  plugins: [
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: Infinity,
-      filename: 'vendor.bundle.js'
-    })
-  ]
+  plugins: pluginList
 };

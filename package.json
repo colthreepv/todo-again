@@ -6,7 +6,8 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack",
     "build-dev": "cross-env NODE_ENV=development webpack",
-    "start": "webpack-dev-server -d --inline",
+    "clean": "rimraf build",
+    "start": "npm run clean && webpack-dev-server -d --inline",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "colthreepv",
@@ -26,6 +27,7 @@
     "babel-preset-react": "^6.5.0",
     "cross-env": "^1.0.7",
     "css-loader": "^0.23.1",
+    "rimraf": "^2.5.2",
     "style-loader": "^0.13.0",
     "webpack": "^2.1.0-beta.4",
     "webpack-dev-server": "^2.0.0-beta"
