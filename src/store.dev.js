@@ -1,5 +1,3 @@
-import { createStore } from 'redux';
-import { todoApp } from './reducers';
 import { base64, decode64 } from 'safe-base64';
 
 const lochash    = location.hash.substr(1);
@@ -10,10 +8,7 @@ if (hashState) { // recover application state from the hash
   window.STATE_FROM_SERVER = JSON.parse(b64state);
 }
 
-const store = createStore(
-  todoApp,
-  window.STATE_FROM_SERVER
-);
+const store = require('./store').default;
 
 // in development every change to the store gets serialized into
 // window.CURRENT_STATE
