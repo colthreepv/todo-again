@@ -5,12 +5,14 @@ import { bindActionCreators } from 'redux';
 import { Logo, Container, Status } from 'todoapp';
 import * as actions from './actions';
 
+import css from 'todoapp/container.css';
+
 class App extends Component {
   render () {
     const { typing, todos } = this.props;
     const { addTodo, typeTodo, checkTodo } = this.props;
     return (
-      <section className="todoapp">
+      <section className={css.todoApp}>
         <Logo/>
         <Container
           text={typing}
@@ -19,7 +21,7 @@ class App extends Component {
           todoList={todos}
           toggleElem={checkTodo}
         />
-        <Status/>
+        <Status todoList={todos}/>
       </section>
     );
   }

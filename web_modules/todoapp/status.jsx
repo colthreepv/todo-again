@@ -1,12 +1,18 @@
 import React, { PropTypes, Component } from 'react';
-const css = require('./status.css');
+import css from './status.css';
 
 export class Status extends Component {
   render () {
+    const todos = this.props.todoList.filter(t => !t.done);
+    const allDone = <span className={css.todoCount}>All tasks done!</span>;
+    const stillTodo = <span className={css.todoCount}><strong>{todos.length}</strong> tasks left</span>;
     return (
       <footer className={css.footer}>
-        <span className={css.todoCount}><strong>2</strong> items left</span>
+        {todos.length > 0 ? stillTodo : allDone}
       </footer>
     );
   }
 }
+Status.propTypes = {
+  todoList: PropTypes.array.isRequired
+};
