@@ -2,6 +2,8 @@
 const path = require('path');
 const webpack = require('webpack');
 
+const pkg = require('./package.json');
+
 const env = process.env.NODE_ENV || 'development';
 const isProd = env === 'production';
 
@@ -31,15 +33,18 @@ if (isProd) { // add plugins in case we're in production
     },
     sourceMap: false
   }));
+} else {
+  pluginList.push(new webpack.LoaderOptionsPlugin({
+    minimize: false,
+    debug: true
+  }));
 }
 
 module.exports = {
-  devServer: {
-    devtool: '#cheap-module-eval-source-map'
-  },
+  devtool: 'cheap-module-source-map', // not sure it works?
   entry: {
     js: path.join(__dirname, 'src', 'main.js'),
-    vendor: ['react', 'react-redux', 'redux']
+    vendor: Object.keys(pkg.dependencies)
   },
   output: {
     path: path.join(__dirname, 'build'),
@@ -55,7 +60,17 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loaders: ['style-loader', 'css-loader?modules']
+        loaders: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            query: {
+              modules: true,
+              importLoaders: 1,
+              localIdentName: '[name]__[local]___[hash:base64:5]'
+            }
+          }
+        ]
       }
     ]
   },
