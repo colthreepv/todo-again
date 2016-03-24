@@ -14,7 +14,8 @@ const pluginList = [
     filename: 'vendor.bundle.js'
   }),
   new webpack.DefinePlugin({
-    'process.env.NODE_ENV': `"${env}"`
+    'process.env.NODE_ENV': `"${env}"`,
+    'process.env.DEVTOOLS': false
   })
 ];
 
