@@ -34,3 +34,6 @@ node_modules
 
 # Webpack build
 build
+
+# levelDB
+level.db
