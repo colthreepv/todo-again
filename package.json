@@ -4,12 +4,13 @@
   "description": "Todo MVC all over again to evaluate possibile frameworks to use",
   "main": "src/main.js",
   "scripts": {
-    "backend": "babel-node backend --presets es2015,stage-2",
+    "backend": "cross-env NODE_ENV=production babel-node backend --presets es2015,stage-2",
     "backend-dev": "nodemon backend -w backend --exec babel-node --presets es2015,stage-2",
     "build": "cross-env NODE_ENV=production webpack",
     "build-dev": "cross-env NODE_ENV=development webpack",
     "clean": "rimraf build",
     "start": "npm run clean && webpack-dev-server --inline",
+    "production": "npm run build && npm run backend",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "colthreepv",

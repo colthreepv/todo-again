@@ -40,11 +40,20 @@ if (isProd) { // add plugins in case we're in production
   }));
 }
 
+const vendorList = [
+  'classnames',
+  'react',
+  'react-dom',
+  'react-redux',
+  'redux',
+  'redux-thunk'
+];
+
 module.exports = {
   devtool: 'cheap-module-source-map', // not sure it works?
   entry: {
     js: path.join(__dirname, 'src', 'main.js'),
-    vendor: Object.keys(pkg.dependencies)
+    vendor: vendorList
   },
   output: {
     path: path.join(__dirname, 'build'),
