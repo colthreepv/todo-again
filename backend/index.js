@@ -1,8 +1,8 @@
-import express from 'express';
-import bodyparser from 'body-parser';
-import promesso from 'promesso';
+const express = require('express');
+const bodyparser = require('body-parser');
+const promesso = require('promesso');
 
-import homepage from './homepage';
+const homepage = require('./homepage');
 
 const app = express();
 

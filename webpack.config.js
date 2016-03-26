@@ -2,8 +2,6 @@
 const path = require('path');
 const webpack = require('webpack');
 
-const pkg = require('./package.json');
-
 const env = process.env.NODE_ENV || 'development';
 const isProd = env === 'production';
 

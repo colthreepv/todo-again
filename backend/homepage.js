@@ -1,16 +1,25 @@
-import path from 'path';
-import levelup from 'levelup';
-import Promise from 'bluebird';
+'use strict';
+const path = require('path');
+const levelup = require('levelup');
+const Promise = require('bluebird');
 
 const lvl = levelup(path.join(__dirname, '..', 'level.db'));
 Promise.promisifyAll(lvl);
 
+// client deps
+const React = require('react');
+const createStore = require('redux').createStore;
+const Provider = require('react-redux').Provider;
+const renderToString = require('react-dom/server').renderToString;
+const App = require('../build/bundle').App;
+const todoApp = require('../build/bundle').todoApp;
 
-
-export default function homepage () {
+function homepage () {
   const initialState = getState().catch(NotFoundError, () => undefined);
   return initialState.then(templateHome);
 }
+
+module.exports = homepage;
 
 // retrieves state from levelup
 function getState () {
@@ -25,6 +34,13 @@ function NotFoundError (err) { return err.notFound; }
 
 // templating
 function templateHome (initialState) {
+  const store = createStore(todoApp, initialState);
+  const html = renderToString(
+    React.createElement(Provider, { store },
+      React.createElement(App)
+    )
+  );
+
   return `
   <!DOCTYPE html>
   <html>
@@ -32,7 +48,7 @@ function templateHome (initialState) {
     <meta charset="utf-8">
   </head>
   <body>
-    <div id="container"></div>
+    <div id="container">${html}</div>
     <script>window.STATE_FROM_SERVER = ${initialState}</script>
     <script src="/build/vendor.bundle.js"></script>
     <script src="/build/bundle.js"></script>
