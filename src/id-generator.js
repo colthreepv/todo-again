@@ -1,4 +1,4 @@
-import { base62 } from 'base62';
+import { base62 } from './modules/base62';
 
 const MIN_VALUE = Math.pow(62, 7);
 const MAX_VALUE = Math.pow(62, 8);

@@ -81,11 +81,5 @@ module.exports = {
       }
     ]
   },
-  resolve: {
-    modules: [
-      'node_modules',
-      'web_modules'
-    ]
-  },
   plugins: pluginList
 };

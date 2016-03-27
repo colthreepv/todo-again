@@ -2,10 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { Logo, Container, Status } from 'todoapp';
+import { Logo, Container, Status } from './modules/todoapp';
 import * as actions from './actions';
 
-import css from 'todoapp/container.css';
+import css from './modules/todoapp/container.css';
 
 class App extends Component {
   render () {
