@@ -1,4 +1,11 @@
 'use strict';
+require('babel-register')({
+  babelrc: false,
+  presets: ['es2015', 'react'],
+  plugins: ['css-modules-transform'],
+  only: 'src'
+});
+
 const path = require('path');
 const levelup = require('levelup');
 const Promise = require('bluebird');
@@ -11,8 +18,8 @@ const React = require('react');
 const createStore = require('redux').createStore;
 const Provider = require('react-redux').Provider;
 const renderToString = require('react-dom/server').renderToString;
-const App = require('../build/bundle').App;
-const todoApp = require('../build/bundle').todoApp;
+const App = require('../src/app').default;
+const todoApp = require('../src/reducers').todoApp;
 
 function homepage () {
   const initialState = getState().catch(NotFoundError, () => undefined);
