@@ -10,6 +10,8 @@ const path = require('path');
 const levelup = require('levelup');
 const Promise = require('bluebird');
 
+const bundles = require('./config').bundles;
+
 const lvl = levelup(path.join(__dirname, '..', 'level.db'));
 Promise.promisifyAll(lvl);
 
@@ -57,8 +59,8 @@ function templateHome (initialState) {
   <body>
     <div id="container">${html}</div>
     <script>window.STATE_FROM_SERVER = ${initialState}</script>
-    <script src="/build/vendor.bundle.js"></script>
-    <script src="/build/bundle.js"></script>
+    <script src="/build/${bundles.vendor}"></script>
+    <script src="/build/${bundles.js}"></script>
   </body>
   </html>`;
 }

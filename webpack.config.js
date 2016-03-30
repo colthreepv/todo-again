@@ -1,15 +1,26 @@
 'use strict';
 const path = require('path');
+const fs = require('fs');
 const webpack = require('webpack');
 
 const env = process.env.NODE_ENV || 'development';
 const isProd = env === 'production';
 
+// webpack is silly and doesn't tell you what is the name of your hashed bundles
+function webpackHashInfo () {
+  this.plugin('done', function (statsData) {
+    const stats = statsData.toJson();
+    if (stats.errors.length) return;
+
+    fs.writeFileSync(path.join(__dirname, 'build', '.bundles.json'), JSON.stringify(stats.assetsByChunkName));
+  });
+}
+
 const pluginList = [
   new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor',
     minChunks: Infinity,
-    filename: 'vendor.bundle.js'
+    filename: isProd ? 'libs-[chunkhash].js' : 'libs.js'
   }),
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': `"${env}"`
@@ -31,6 +42,7 @@ if (isProd) { // add plugins in case we're in production
     },
     sourceMap: false
   }));
+  pluginList.push(webpackHashInfo);
 } else {
   pluginList.push(new webpack.LoaderOptionsPlugin({
     minimize: false,
@@ -38,7 +50,7 @@ if (isProd) { // add plugins in case we're in production
   }));
 }
 
-const vendorList = [
+const browserLibs = [
   'classnames',
   'react',
   'react-dom',
@@ -51,11 +63,11 @@ module.exports = {
   devtool: 'cheap-module-source-map', // not sure it works?
   entry: {
     js: path.join(__dirname, 'src', 'main.js'),
-    vendor: vendorList
+    vendor: browserLibs
   },
   output: {
     path: path.join(__dirname, 'build'),
-    filename: 'bundle.js',
+    filename: isProd ? 'bundle-[chunkhash].js' : 'bundle.js',
     publicPath: '/build/'
   },
   module: {
