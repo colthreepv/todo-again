@@ -6,8 +6,8 @@
   "scripts": {
     "backend": "cross-env NODE_ENV=production node backend",
     "backend-dev": "nodemon backend -w backend",
-    "build": "cross-env NODE_ENV=production webpack",
-    "build-dev": "cross-env NODE_ENV=development webpack",
+    "build": "npm run clean && cross-env NODE_ENV=production webpack",
+    "build-dev": "npm run clean && cross-env NODE_ENV=development webpack",
     "clean": "rimraf build",
     "start": "npm run clean && webpack-dev-server --inline",
     "production": "npm run build && npm run backend",
