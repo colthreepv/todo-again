@@ -6,14 +6,8 @@ require('babel-register')({
   only: 'src'
 });
 
-const path = require('path');
-const levelup = require('levelup');
-const Promise = require('bluebird');
-
+const l = require('./level');
 const bundles = require('./config').bundles;
-
-const lvl = levelup(path.join(__dirname, '..', 'level.db'));
-Promise.promisifyAll(lvl);
 
 // client deps
 const React = require('react');
@@ -24,25 +18,15 @@ const App = require('../src/app').default;
 const todoApp = require('../src/reducers').todoApp;
 
 function homepage () {
-  const initialState = getState().catch(NotFoundError, () => undefined);
+  const initialState = l.getState().catch(l.NotFoundError, () => undefined);
   return initialState.then(templateHome);
 }
 
 module.exports = homepage;
 
-// retrieves state from levelup
-function getState () {
-  return lvl.getAsync('state').then(data => JSON.parse(data));
-}
-
-function setState (state) {
-  return lvl.putAsync('state', JSON.stringify(state));
-}
-
-function NotFoundError (err) { return err.notFound; }
-
 // templating
 function templateHome (initialState) {
+  console.log(initialState);
   const store = createStore(todoApp, initialState);
   const html = renderToString(
     React.createElement(Provider, { store },
@@ -58,7 +42,7 @@ function templateHome (initialState) {
   </head>
   <body>
     <div id="container">${html}</div>
-    <script>window.STATE_FROM_SERVER = ${initialState}</script>
+    <script>window.STATE_FROM_SERVER = ${JSON.stringify(initialState)}</script>
     <script src="/build/${bundles.vendor}"></script>
     <script src="/build/${bundles.js}"></script>
   </body>

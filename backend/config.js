@@ -6,6 +6,13 @@ const config = {
   bundles: null, // placeholder
   bundleFile: '.bundles.json'
 };
-config.bundles = require(path.join(config.buildDir, config.bundleFile));
+if (process.env.NODE_ENV === 'production') {
+  config.bundles = require(path.join(config.buildDir, config.bundleFile));
+} else {
+  config.bundles = {
+    vendor: 'libs.js',
+    js: 'bundle.js'
+  };
+}
 
 module.exports = config;
