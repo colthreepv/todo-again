@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import debounce from 'lodash/debounce';
 
 import { Logo, Container, Status } from './modules/todoapp';
 import * as actions from './actions';
@@ -51,11 +52,31 @@ function mapStateToProps (state) {
   return { todos: state.todos.list, typing: state.typing };
 }
 
+/**
+ * wrapActions does the job of sandwiching
+ *
+ * 1) the Action gets created calling the ActionCreator
+ * 2) then the saveState gets dispatched
+ * 3) then the original Action gets returned
+ *
+ * but (2) only happens every 400ms
+ */
+function wrapActions (action, dispatch) {
+  const delayedSave = debounce(function () {
+    dispatch(actions.saveState());
+  }, 400);
+  return function () {
+    const val = action.apply(this, arguments);
+    delayedSave();
+    return val;
+  };
+}
+
 function mapDispatchToProps (dispatch) {
   return bindActionCreators({
-    addTodo,
-    typeTodo,
-    checkTodo
+    addTodo: wrapActions(addTodo, dispatch),
+    typeTodo: wrapActions(typeTodo, dispatch),
+    checkTodo: wrapActions(checkTodo, dispatch)
   }, dispatch);
 }
 

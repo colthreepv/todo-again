@@ -1,6 +1,7 @@
 import { idGenerator as generator } from './id-generator';
 import { ADD_TODO, CHECK_TODO } from './actions';
 import { TYPE_TODO } from './actions';
+import { SAVE_STATE_START, SAVE_STATE_DONE } from './actions';
 
 import { combineReducers } from 'redux';
 
@@ -55,4 +56,15 @@ function typing (state = '', action) {
   }
 }
 
-export const todoApp = combineReducers({ todos, typing });
+
+function saving (state = '', action) {
+  switch (action.type) {
+  default:
+    return 'lol';
+  case SAVE_STATE_START:
+  case SAVE_STATE_DONE:
+    return state;
+  }
+}
+
+export const todoApp = combineReducers({ todos, typing, saving });
