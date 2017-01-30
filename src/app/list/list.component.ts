@@ -1,19 +1,27 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TodoList } from '../todo';
+import { Todo, TodoList } from '../todo';
 
 @Component({
   selector: 'todo-list',
-  templateUrl: './list.component.html',
+  template: `
+    <div class="todo-list" *ngFor="let todo of list">
+      <todo-element [element]="todo" (toggleElement)="toggle(todo)" ></todo-element>
+    </div>
+  `,
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-  @Input()
-  list: TodoList
+  @Input() list = <TodoList>null;
 
   constructor() {
     this.list = [
-      { id: 'asdomasdo', text: 'Hello World', done: false }
+      new Todo('First cool todo element', false)
     ];
+  }
+
+  toggle(todo: Todo) {
+    todo.toggle();
+    console.log('toggled element', todo);
   }
 
   ngOnInit() {
