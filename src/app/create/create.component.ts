@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ListService } from '../list.service';
 
 @Component({
   selector: 'todo-create',
@@ -15,10 +16,11 @@ import { Component, OnInit } from '@angular/core';
 export class CreateComponent implements OnInit {
   newText: string = '';
 
-  constructor() { }
+  constructor(private list: ListService) { }
 
   createTodo(evt: Event) {
     // add a new todo in the List service
+    this.list.addTodo(this.newText);
     console.log('created new todo');
     this.newText = '';
   }

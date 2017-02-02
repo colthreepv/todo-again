@@ -8,6 +8,8 @@ import { CreateComponent } from './create/create.component';
 import { ElementComponent } from './element/element.component';
 import { ListComponent } from './list/list.component';
 
+import { ListService } from './list.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +22,7 @@ import { ListComponent } from './list/list.component';
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [ListService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

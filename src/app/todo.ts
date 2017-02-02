@@ -6,9 +6,10 @@ export interface TodoElement {
   done: boolean;
 }
 
-export interface TodoList {
+export interface TodoList extends Array<TodoElement>{
   [index: number]: TodoElement;
-}
+  // byId: {};
+};
 
 export class Todo implements TodoElement {
   id: string;

@@ -1,6 +1,7 @@
 const ALPHABET = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 export function base62 (integer: number): string {
+  // FIXME: handle numbers between 0 and 1 (from Math.random())
   if (integer === 0) return '0';
   let s = '';
   let decrementing = integer;

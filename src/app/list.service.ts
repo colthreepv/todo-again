@@ -10,5 +10,12 @@ export class ListService {
 
   constructor() { }
 
-  // addTodo()
+  addTodo(text: string){
+    const newTodo = new Todo(text, false);
+    this.source.next([...this.source.getValue(), newTodo]);
+  }
+
+  toggleTodo(which: TodoElement) {
+
+  }
 }
