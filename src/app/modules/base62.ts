@@ -1,10 +1,15 @@
 const ALPHABET = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 export function base62 (integer: number): string {
-  // FIXME: handle numbers between 0 and 1 (from Math.random())
+  let decrementing;
+  if (integer > 0 && integer < 1) {
+    const commaLength = integer.toString().substr(2).length;
+    decrementing = integer * Math.pow(10, commaLength);
+  } else {
+    decrementing = integer;
+  }
   if (integer === 0) return '0';
   let s = '';
-  let decrementing = integer;
   while (decrementing > 0) {
     s = ALPHABET[decrementing % 62] + s;
     decrementing = Math.floor(decrementing/62);

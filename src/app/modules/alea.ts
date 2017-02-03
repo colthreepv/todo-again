@@ -22,6 +22,10 @@ export function Alea(seed: string | number) {
   mash = null;
 }
 
+export interface AleaPrng {
+  next(): number;
+}
+
 function copy(f, t) {
   t.c = f.c;
   t.s0 = f.s0;
