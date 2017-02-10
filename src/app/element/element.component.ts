@@ -5,7 +5,7 @@ import { TodoElement } from '../todo';
   selector: 'todo-element',
   template: `
     <div class="todo-element">
-      <input type="checkbox" class="element-toggle" (click)="toggleElement($event)" />
+      <input type="checkbox" class="element-toggle" (click)="toggleElement($event)" [(ngModel)]="element.done" />
       <span class="element-label" [class.done]="element.done">{{element.text}}</span>
     </div>
   `,
