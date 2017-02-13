@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { StoreModule } from '@ngrx/store';
 
 import { AppComponent } from './app.component';
 import { CreateComponent } from './create/create.component';
@@ -9,6 +10,8 @@ import { ElementComponent } from './element/element.component';
 import { ListComponent } from './list/list.component';
 
 import { ListService } from './list.service';
+
+import reducer, { TodoActions } from './state';
 
 @NgModule({
   declarations: [
@@ -20,9 +23,10 @@ import { ListService } from './list.service';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    StoreModule.provideStore(reducer)
   ],
-  providers: [ListService],
+  providers: [TodoActions, ListService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

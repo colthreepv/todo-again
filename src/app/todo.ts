@@ -1,16 +1,16 @@
 import { idGenerator as generator } from './modules/id-generator';
 
-export interface TodoElement {
+export interface Todo {
   id: string;
   text: string;
   done: boolean;
 }
 
-export interface TodoList extends Array<TodoElement>{
-  [index: number]: TodoElement;
+export interface TodoList extends Array<Todo>{
+  [index: number]: Todo;
 };
 
-// export class Todo implements TodoElement {
+// export class Todo implements Todo {
 //   id: string;
 //   text: string;
 //   done: boolean;
