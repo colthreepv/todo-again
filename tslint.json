@@ -1,4 +1,5 @@
 {
+  "extends": "tslint-config-standard",
   "rulesDirectory": [
     "node_modules/codelyzer"
   ],
@@ -25,11 +26,7 @@
       140
     ],
     "member-access": false,
-    "member-ordering": [
-      true,
-      "static-before-instance",
-      "variables-before-functions"
-    ],
+    "member-ordering": "variables-before-functions",
     "no-arg": true,
     "no-bitwise": true,
     "no-console": [
@@ -50,7 +47,7 @@
     "no-shadowed-variable": true,
     "no-string-literal": false,
     "no-string-throw": true,
-    "no-switch-case-fall-through": true,
+    "no-switch-case-fall-through": false,
     "no-trailing-whitespace": true,
     "no-unused-expression": true,
     "no-use-before-declare": true,
