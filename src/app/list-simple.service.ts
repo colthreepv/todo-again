@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { TodoElement, TodoList } from './todo';
+import { Todo, TodoList } from './todo';
 
 import { Alea, AleaPrng } from './modules/alea';
 import { base62 } from './modules/base62';
@@ -18,11 +18,11 @@ export class ListService {
   }
 
   addTodo(text: string){
-    const newTodo = <TodoElement>{id: base62(this.prng.next()), text, done: false};
+    const newTodo = <Todo>{id: base62(this.prng.next()), text, done: false};
     this.source.next([...this.source.getValue(), newTodo]);
   }
 
-  toggleTodo(which: TodoElement) {
+  toggleTodo(which: Todo) {
     const oldList = this.source.getValue();
     const idx = oldList.indexOf(which);
     const newList = oldList.slice(0);

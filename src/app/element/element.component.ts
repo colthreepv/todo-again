@@ -1,5 +1,5 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
-import { TodoElement } from '../todo';
+import { Todo } from '../todo';
 
 @Component({
   selector: 'todo-element',
@@ -13,7 +13,7 @@ import { TodoElement } from '../todo';
 })
 export class ElementComponent implements OnInit {
 
-  @Input() element = <TodoElement>null;
+  @Input() element = <Todo>null;
 
   @Output('toggleElement') toggle = new EventEmitter();
 

@@ -10,7 +10,19 @@ export interface Todo {
 
 export type TodoListState = List<Todo>;
 
-const initialState = List.of(null as Todo);
+// const initialState = List.of(null as Todo);
+const initialState = List([
+  {
+    id: 'asdomasdo',
+    text: 'Hello World',
+    completed: false
+  },
+  {
+    id: 'castorualdo',
+    text: 'Yeahhhh',
+    completed: true
+  }
+]);
 
 export default function (state = initialState, action: Action): TodoListState {
   switch (action.type) {

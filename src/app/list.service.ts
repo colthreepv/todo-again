@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { TodoElement, TodoList } from './todo';
-import { BehaviorSubject } from 'rxjs/behaviorsubject'
+import { Todo, TodoList } from './todo';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/observable';
 import 'rxjs/add/observable/range';
 import 'rxjs/add/operator/scan';
@@ -23,11 +23,11 @@ export class ListService {
   }
 
   addTodo(text: string){
-    const newTodo = <TodoElement>{id: base62(this.prng.next()), text, done: false};
+    const newTodo = <Todo>{id: base62(this.prng.next()), text, done: false};
     this.source.next([...this.source.getValue(), newTodo]);
   }
 
-  toggleTodo(which: TodoElement) {
+  toggleTodo(which: Todo) {
     const oldList = this.source.getValue();
     const idx = oldList.indexOf(which);
     const newList = oldList.slice(0);

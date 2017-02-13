@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TodoElement, TodoList } from '../todo';
-import { ListService } from '../list.service';
-import { Observable } from 'rxjs/observable';
+import { Todo, TodoList } from '../todo';
+import { Observable } from 'rxjs/Observable';
+
+import {AppState} from '../state';
+import {Store} from '@ngrx/store';
 
 @Component({
   selector: 'todo-list',
@@ -13,18 +15,21 @@ import { Observable } from 'rxjs/observable';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-  @Input() list = <Observable<TodoList>>null;
+  @Input() list: Observable<any>;
 
-  constructor(private listService: ListService) {
-     this.list = listService.todos;
+  constructor (
+    private store: Store<AppState>
+  ) {
+    this.list = store.select('todo');
+    this.list.do(wat => console.log(wat));
+    // this.list = listService.todos;
   }
 
-  toggle(todo: TodoElement) {
-    this.listService.toggleTodo(todo);
+  toggle (todo: Todo) {
+    // this.listService.toggleTodo(todo);
     console.log('toggled element', todo);
   }
 
-  ngOnInit() {
-  }
+  ngOnInit () {}
 
 }

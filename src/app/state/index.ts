@@ -1,37 +1,31 @@
-// import '@ngrx/core/add/operator/select';
 import {compose} from '@ngrx/core/compose';
-// import {storeLogger} from 'ngrx-store-logger';
-import {Action} from '@ngrx/store';
+import {Action, ActionReducer, combineReducers} from '@ngrx/store';
+import {storeLogger} from 'ngrx-store-logger';
+
+import { environment } from '../../environments/environment';
 import todoReducer from './data.todo.reducer';
-
-// import heroListReducer, * as fromHeroList from './hero-list';
-// import heroReducer, * as fromHero from './hero';
-
-// uncomment the storeLogger import and this line
-// and comment out the other export default line to turn on
-// the store logger to see the actions as they flow through the store
-// turned this off by default as i found the logger kinda noisy
-
-// export default compose(combineReducers)({
-//   todo: todoListReducer
-// });
 
 export interface LeafState {
   [name: string]: any;
 }
 
-export interface AppState {
-  ui: LeafState;
-  data: LeafState;
+export interface State {
+  todo: LeafState;
 }
 
-export default function (state: AppState, action: Action): AppState {
-  return {
-    ui: {},
-    data: {
-      todo: todoReducer(state.data['todo'], action)
-    }
-  };
+const reducers: State = {
+  todo: todoReducer
+};
+
+const developmentReducer: ActionReducer<State> = compose(storeLogger(), combineReducers)(reducers);
+const productionReducer: ActionReducer<State> = combineReducers(reducers);
+
+export default function reducer (state: State, action: Action): State {
+  if (environment.production) {
+    return productionReducer(state, action);
+  } else {
+    return developmentReducer(state, action);
+  }
 }
 
 export * from './todo.actions';
