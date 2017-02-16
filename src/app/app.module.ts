@@ -3,16 +3,18 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 import { AppComponent } from './app.component';
 import { CreateComponent } from './create/create.component';
 import { ElementComponent } from './element/element.component';
 import { ListComponent } from './list/list.component';
 
-import { ListService } from './list.service';
-
 import {MapToArrayPipe} from './pipes/map-to-array';
-import reducer, { TodoActions } from './state';
+import reducer from './state';
+import {TodoEffects} from './effects/todo';
+
+import {TodoAPI} from './todo.service';
 
 @NgModule({
   declarations: [
@@ -26,9 +28,10 @@ import reducer, { TodoActions } from './state';
     BrowserModule,
     FormsModule,
     HttpModule,
-    StoreModule.provideStore(reducer)
+    StoreModule.provideStore(reducer),
+    EffectsModule.run(TodoEffects)
   ],
-  providers: [TodoActions, ListService],
+  providers: [TodoAPI],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

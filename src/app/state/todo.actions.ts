@@ -29,4 +29,7 @@ export class TodoActions {
   deleteTodo (id: number): Action {
     return { type: TodoActions.TOGGLE_TODO, payload: {id} };
   }
+
+  static FETCH_TODO = 'FETCH_TODO';
+  static RETRIEVE_TODO = 'RETRIEVE_TODO';
 }

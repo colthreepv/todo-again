@@ -2,28 +2,13 @@ import { Action } from '@ngrx/store';
 import { Map } from 'immutable';
 import { TodoActions } from './todo.actions';
 
-export interface Todo {
-  id: string;
-  text: string;
-  completed: boolean;
-};
+import { Todo } from '../todo';
 
 export type TodoListState = Map<string, Todo>;
 
 // const initialState = Map.of(null as Todo);
 
-const initialState = Map({
-  asdomasdo: {
-    id: 'asdomasdo',
-    text: 'Hello World',
-    completed: false
-  },
-  castorualdo: {
-    id: 'castorualdo',
-    text: 'Yeahhhh',
-    completed: true
-  }
-});
+const initialState: TodoListState = Map<string, Todo>();
 
 export default function (state = initialState, action: Action): TodoListState {
   switch (action.type) {
@@ -40,6 +25,12 @@ export default function (state = initialState, action: Action): TodoListState {
 
     case TodoActions.DELETE_TODO: {
       return state.delete(action.payload.id);
+    }
+
+    case TodoActions.RETRIEVE_TODO: {
+      const payload: Todo[] = action.payload;
+      const hashed = payload.reduce((hash, curr: Todo) => { hash[curr.id] = curr; return hash; }, {});
+      return Map<string, Todo>(hashed);
     }
 
     // missing actions!

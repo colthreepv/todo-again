@@ -1,9 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Todo, TodoList } from '../todo';
-import { Observable } from 'rxjs/Observable';
-
-import {State, TodoActions} from '../state';
+import {Component, Input, OnInit} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
 import {Store} from '@ngrx/store';
+import 'rxjs/add/operator/do';
+
+import {Todo} from '../todo';
+import {State, TodoActions} from '../state';
+import {TodoAPI} from '../todo.service';
 
 @Component({
   selector: 'todo-list',
@@ -18,19 +20,22 @@ export class ListComponent implements OnInit {
   @Input() list: Observable<any>;
 
   constructor (
-    private store: Store<State>
+    private store: Store<State>,
+    private api: TodoAPI
   ) {
     this.list = store.select('todo');
     this.list.do(wat => console.log(wat));
-    // this.list = listService.todos;
   }
 
   toggle (todo: Todo) {
-    // this.listService.toggleTodo(todo);
     this.store.dispatch({ type: TodoActions.TOGGLE_TODO, payload: todo.id });
     console.log('toggled element', todo);
   }
 
-  ngOnInit () {}
+  ngOnInit () {
+    // this.api.addTodo('Hello World!').subscribe(wat => console.log(wat));
+    // this.api.retrieveTodo().subscribe(wat => console.log(wat));
+    this.store.dispatch({ type: TodoActions.FETCH_TODO });
+  }
 
 }

@@ -6,7 +6,7 @@ import { Todo } from '../todo';
   template: `
     <div class="todo-element">
       <input type="checkbox" class="element-toggle" (click)="toggle.emit(this.element)" [checked]="element.completed" />
-      <span class="element-label" [class.done]="element.completed">{{element.text}}</span>
+      <span class="element-label" [class.done]="element.completed">{{element.title}}</span>
     </div>
   `,
   styleUrls: ['./element.component.css']

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ListService } from '../list.service';
+import {Store} from '@ngrx/store';
+
+import {Todo} from '../todo';
+import {State, TodoActions} from '../state';
 
 @Component({
   selector: 'todo-create',
@@ -14,17 +17,19 @@ import { ListService } from '../list.service';
   styleUrls: ['./create.component.css']
 })
 export class CreateComponent implements OnInit {
-  newText: string = '';
+  newText = '';
 
-  constructor(private list: ListService) { }
+  constructor (
+    private store: Store<State>
+  ) {}
 
-  createTodo(evt: Event) {
-    // add a new todo in the List service
-    this.list.addTodo(this.newText);
-    console.log('created new todo');
+  createTodo (evt: Event) {
+    // FIXME: AJAX not getting called
+    const newTodo: Todo = { id: 'wtf', text: this.newText, done: false };
+    this.store.dispatch({ type: TodoActions.ADD_TODO_SUCCESS, payload: newTodo });
     this.newText = '';
   }
 
-  ngOnInit() {}
+  ngOnInit () {}
 
 }

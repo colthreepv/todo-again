@@ -7,6 +7,9 @@ import { AppModule } from './app/app.module';
 
 if (environment.production) {
   enableProdMode();
+} else {
+  Error['stackTraceLimit'] = Infinity;
+  require('zone.js/dist/long-stack-trace-zone');
 }
 
 platformBrowserDynamic().bootstrapModule(AppModule);
