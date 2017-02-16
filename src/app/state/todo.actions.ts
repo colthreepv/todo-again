@@ -21,12 +21,12 @@ export class TodoActions {
   }
 
   static TOGGLE_TODO = 'TOGGLE_TODO';
-  toggleTodo (idx: number): Action {
-    return { type: TodoActions.TOGGLE_TODO, payload: {idx} };
+  toggleTodo (id: number): Action {
+    return { type: TodoActions.TOGGLE_TODO, payload: {id} };
   }
 
   static DELETE_TODO = 'DELETE_TODO';
-  deleteTodo (idx: number): Action {
-    return { type: TodoActions.TOGGLE_TODO, payload: {idx} };
+  deleteTodo (id: number): Action {
+    return { type: TodoActions.TOGGLE_TODO, payload: {id} };
   }
 }

@@ -11,6 +11,7 @@ import { ListComponent } from './list/list.component';
 
 import { ListService } from './list.service';
 
+import {MapToArrayPipe} from './pipes/map-to-array';
 import reducer, { TodoActions } from './state';
 
 @NgModule({
@@ -18,7 +19,8 @@ import reducer, { TodoActions } from './state';
     AppComponent,
     CreateComponent,
     ElementComponent,
-    ListComponent
+    ListComponent,
+    MapToArrayPipe
   ],
   imports: [
     BrowserModule,
