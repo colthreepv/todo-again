@@ -24,17 +24,17 @@ export class ListComponent implements OnInit {
     private api: TodoAPI
   ) {
     this.list = store.select('todo');
-    this.list.do(wat => console.log(wat));
   }
 
   toggle (todo: Todo) {
     this.store.dispatch({ type: TodoActions.TOGGLE_TODO, payload: todo.id });
-    console.log('toggled element', todo);
+  }
+
+  delete (todo: Todo) {
+    this.store.dispatch({ type: TodoActions.DELETE_TODO, payload: todo.id });
   }
 
   ngOnInit () {
-    // this.api.addTodo('Hello World!').subscribe(wat => console.log(wat));
-    // this.api.retrieveTodo().subscribe(wat => console.log(wat));
     this.store.dispatch({ type: TodoActions.FETCH_TODO });
   }
 

@@ -23,7 +23,7 @@ export default function (state = initialState, action: Action): TodoListState {
       return state.set(action.payload, Object.assign({}, todo, { completed: !todo.completed }));
     }
 
-    case TodoActions.DELETE_TODO: {
+    case TodoActions.DELETED_TODO: {
       return state.delete(action.payload.id);
     }
 

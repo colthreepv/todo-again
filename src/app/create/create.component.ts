@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {Store} from '@ngrx/store';
 
 import {Todo} from '../todo';
@@ -16,7 +16,7 @@ import {State, TodoActions} from '../state';
   `,
   styleUrls: ['./create.component.css']
 })
-export class CreateComponent implements OnInit {
+export class CreateComponent {
   newText = '';
 
   constructor (
@@ -25,11 +25,9 @@ export class CreateComponent implements OnInit {
 
   createTodo (evt: Event) {
     // FIXME: AJAX not getting called
-    const newTodo: Todo = { id: 'wtf', text: this.newText, done: false };
-    this.store.dispatch({ type: TodoActions.ADD_TODO_SUCCESS, payload: newTodo });
+    // const newTodo: Todo = { id: 'wtf', text: this.newText, done: false };
+    this.store.dispatch({ type: TodoActions.ADD_TODO, payload: this.newText });
     this.newText = '';
   }
-
-  ngOnInit () {}
 
 }
