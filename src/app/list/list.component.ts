@@ -13,6 +13,7 @@ import {TodoAPI} from '../todo.service';
     <div class="todo-list" *ngFor="let todo of list | async | mapToArray">
       <todo-element [element]="todo" (toggle)="toggle(todo)" (delete)="delete(todo)"></todo-element>
     </div>
+    <button (click)="reload()">Reload stuff plz</button>
   `,
   styleUrls: ['./list.component.css']
 })
@@ -32,6 +33,10 @@ export class ListComponent implements OnInit {
 
   delete (todo: Todo) {
     this.store.dispatch({ type: TodoActions.DELETE_TODO, payload: todo.id });
+  }
+
+  reload () {
+    this.store.dispatch({ type: TodoActions.FETCH_TODO });
   }
 
   ngOnInit () {

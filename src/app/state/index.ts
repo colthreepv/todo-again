@@ -3,6 +3,7 @@ import {Action, ActionReducer, combineReducers} from '@ngrx/store';
 import {storeLogger} from 'ngrx-store-logger';
 
 import { environment } from '../../environments/environment';
+import uiReducer from './ui.reducer';
 import todoReducer from './data.todo.reducer';
 
 export interface LeafState {
@@ -10,10 +11,12 @@ export interface LeafState {
 }
 
 export interface State {
+  ui: LeafState;
   todo: LeafState;
 }
 
 const reducers: State = {
+  ui: uiReducer,
   todo: todoReducer
 };
 

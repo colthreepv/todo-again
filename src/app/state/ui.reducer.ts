@@ -16,6 +16,10 @@ const initialState: UiState = {
 
 export default function (state = initialState, action: Action): UiState {
   switch (action.type) {
+    case UiActions.AJAX_ERROR: {
+      console.log('OMG THIS HAPPNDS');
+      return state;
+    }
     // missing actions!
     default: { return state; }
   }

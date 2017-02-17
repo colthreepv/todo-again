@@ -33,7 +33,6 @@ export default function (state = initialState, action: Action): TodoListState {
       return Map<string, Todo>(hashed);
     }
 
-    // missing actions!
     default: { return state; }
   }
 }
