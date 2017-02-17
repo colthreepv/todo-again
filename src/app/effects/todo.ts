@@ -26,9 +26,14 @@ export class TodoEffects {
 
   @Effect() retrieveTodo$: Observable<Action> = this.action$
     .ofType(TodoActions.FETCH_TODO)
-    .switchMap(() => {
-      const returnError = Math.random() > 0.2;
-      return returnError ? Observable.throw('Bad Stuff Happened sir') : this.api.retrieveTodo();
+    // .switchMap(() => {
+    //   const returnError = Math.random() > 0.2;
+    //   return returnError ? Observable.throw('Bad Stuff Happened sir') : this.api.retrieveTodo();
+    // })
+    .switchMap(() => this.api.retrieveTodo())
+    .map((todos) => {
+      console.log('will this be executed anyway?');
+      return { type: TodoActions.RETRIEVE_TODO, payload: todos };
     })
     .catch(err => {
       console.log('Please tell me what happened', err);
@@ -36,12 +41,8 @@ export class TodoEffects {
       setTimeout(() => {
         this.store.dispatch({ type: TodoActions.FETCH_TODO });
       }, 1000);
-      return Observable.empty();
+      return Observable.throw(err);
     })
-    .map((todos) => {
-      console.log('will this be executed anyway?');
-      return { type: TodoActions.RETRIEVE_TODO, payload: todos };
-    });
 
   @Effect() addTodo$: Observable<Action> = this.action$
     .ofType(TodoActions.ADD_TODO)
