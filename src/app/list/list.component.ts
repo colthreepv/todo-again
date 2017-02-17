@@ -11,7 +11,7 @@ import {TodoAPI} from '../todo.service';
   selector: 'todo-list',
   template: `
     <div class="todo-list" *ngFor="let todo of list | async | mapToArray">
-      <todo-element [element]="todo" (toggle)="toggle(todo)"></todo-element>
+      <todo-element [element]="todo" (toggle)="toggle(todo)" (delete)="delete(todo)"></todo-element>
     </div>
   `,
   styleUrls: ['./list.component.css']

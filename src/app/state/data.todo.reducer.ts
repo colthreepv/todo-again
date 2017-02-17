@@ -12,7 +12,7 @@ const initialState: TodoListState = Map<string, Todo>();
 
 export default function (state = initialState, action: Action): TodoListState {
   switch (action.type) {
-    case TodoActions.ADD_TODO_SUCCESS: {
+    case TodoActions.ADDED_TODO: {
       const newTodo: Todo = action.payload;
       return state.set(newTodo.id, newTodo);
     }
@@ -24,7 +24,7 @@ export default function (state = initialState, action: Action): TodoListState {
     }
 
     case TodoActions.DELETED_TODO: {
-      return state.delete(action.payload.id);
+      return state.delete(action.payload);
     }
 
     case TodoActions.RETRIEVE_TODO: {
